@@ -94,6 +94,12 @@ ge x y = le y x
 isEven :: Nat -> Bool
 isEven _ = undefined
 
+-- relational operators on Nat
+
+
+
+
+-- misc arith functions
 
 --return the largest of 2 Nats
 max :: Nat -> Nat -> Nat
@@ -102,34 +108,41 @@ max x y = cond (lt x y) y x
 
 
 -- write a data type for the days of the week
-data Weekday -- = ...  deriving Show
+data Weekday = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday deriving Show
 
 -- what is your favorite Day?
 favoriteDay :: Weekday
-favoriteDay = undefined
+favoriteDay = Friday
 
 -- write a function that returns true if it is a weekend
 isWeekend :: Weekday -> Bool
-isWeekend  _     = undefined
+isWeekend  Saturday = True
+isWeekend  Sunday   = True
+isWeekend  _ = False
+
 
 -- write a data type for the Months of the year
-data Month -- = ...  deriving Show
+data Month = January | February | March | April | May | June | July | August | September | October | November | December deriving Show
 
 -- what month has your birthday?
 partyMonth :: Month
-partyMonth = undefined
+partyMonth = September
 
 -- write a function that tells when a month is in the 2018 Fall Semester (see https://www.bu.edu/reg/calendars/) return True if it is
 needToDoWork :: Month -> Bool
-needToDoWork _ = undefined
+needToDoWork September = True
+needToDoWork October = True
+needToDoWork November = True
+needToDoWork December = True
+needToDoWork _ = False
 
 
 -- write a data type that contains a month, a Nat (representing which week), and a weekday
-data Date -- = ...  deriving Show
+data Date =  Month Nat Weekday  deriving Show
 
 -- when is this homework due?
 homworkIsDueOn :: Date
-homworkIsDueOn  = undefined
+homworkIsDueOn  = September (Succ Zero) Tuesday
 
 -- write a program that returns true on CS 320 lecture dates
 lectureDay :: Date -> Bool
@@ -211,7 +224,7 @@ length _  = undefined
 -- in lab we saw that we can return Maybe data when we want to return something but might not  
 data Maybe x = Nothing | Just x     deriving Show
 
--- functions that returns something if it is the last element of the list and Nothing if the list is empty
+-- functions that returns something if it is the last element of the list and Nothing
 
 last :: (List a) -> (Maybe a)
 last _  = undefined
@@ -247,7 +260,7 @@ data Tree a = Null | Node (Tree a) a (Tree a)     deriving Show
 size :: (Tree a) -> Nat
 size  _  = undefined
 
--- suppose the height is number of nodes in longest path from root to leaf
+-- suppose the height is number of nodes in longest path
 
 height :: (Tree a) -> Nat
 height  _  = undefined
