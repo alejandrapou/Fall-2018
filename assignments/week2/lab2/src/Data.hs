@@ -10,71 +10,114 @@ import Prelude(Show, undefined)
 
 data Bool = True | False deriving Show
 
-exampleBool1 = undefined
-exampleBool2 = undefined
+exampleBool1 = True
+exampleBool2 = False
 
-and _ _ = undefined
+and True True   = True
+and True False  = False
+and False True  = False
+and False False = False
 
 
 data Nat = Zero | Succ Nat deriving Show
 
-three = undefined
-five = undefined
+three = Succ(Succ(Succ Zero))
+five = Succ(Succ(three))
 
-add _ _ = undefined
+add Zero Zero         = Zero
+add Zero (Suc n)      = Succ n
+add (Succ n) Zero     = Succ n
+add (Succ n) (Succ m) = (Succ(Succ(Add n m)))
+
+add2 Zero x = x
+add2 (Succ m) n  = Succ(add2 m n)
 
 -- now write your own data type, for the colors of a stop light
 
 -- data Stoplight = ... deriving Show
 
-favoriteColor = undefined
+data StopLight = Red | Yellow | Green deriving Show
 
-canGo _ = undefined
+favoriteColor = Green
 
+leastFavoriteColor = Red five
+
+canGo Green  = True
+canGo (Red _)= False
+canGo Yellow = True
+canGo White  = True
+
+--abbreviation:
+
+canGo2 (Red _) = False
+canGo2 _ = True
 
 data ListNat = NilNat | ConsNat Nat ListNat deriving Show
 
-exampleListNat = undefined
+exampleListNat = ConsNat Zero (NilNat)
 
-lengthOfListNat _  = undefined
+lengthOfListNat NilNat  = Zero
+lengthOfListNat (ConsNat _ x) = Succ (lengthOfListNat x)
 
 
 data ListBool = NilBool | ConsBool Bool ListBool deriving Show
 
-exampleListBool = undefined
+exampleListBool = ConsBool True (ConsBool False (NilBool))
 
-lengthOfListBool _  = undefined
+lengthOfListBool NilBool= Zero
+lengthOfListBool (ConsBool _ x)  = Succ (lengthOfListBool x)
 
 -- ... this get's very tiresome
 
 data List a = Nil | Cons a (List a) deriving Show -- where a means anything
 
-exampleList = undefined
+exampleList = Cons Zero (Cons five (Nil))
 
-length _ = undefined
+length Nil = Zero
 
+length (Cons _ x) = Zero
 
 -- data StudentYear = ... deriving Show -- where a means anything
 
-exampleStudentYear = undefined
+data StudentYear = Freshman | Sophomore | Junior | Senior deriving Show 
+
+exampleStudentYear = Freshman
 
 -- write an function that shows how many years a student is expected to graduate.  For instance a Sophomore is expected to graduate in 3 years.
-expectedYearsToGraduate _ = undefined
+
+expectedYearsToGraduate Senior    = Succ Zero
+expectedYearsToGraduate Junior    = Succ (Succ Zero)
+expectedYearsToGraduate Sophomore = Succ (Succ (Succ Zero))
+expectedYearsToGraduate Freshman  = Succ (Succ (Succ (Succ Zero)))
+
+data Maybe a = Nothing | Just a deriving Show
 
 -- how can we write the inverse?
-fromExpectedYearsToGraduate _ = undefined
+
+fromExpectedYearsToGraduate (Succ Zero)                      = Just Senior
+fromExpectedYearsToGraduate (Succ (Succ Zero))               = Just Junior
+fromExpectedYearsToGraduate (Succ (Succ (Succ Zero )))       = Just Sophomore
+fromExpectedYearsToGraduate (Succ (Succ (Succ (Succ Zero)))) = Just Freshman
+fromExpectedYearsToGraduate _ = Nothing
 
 
 
 -- what is the smallest datatype you can come up with?
--- data Smallests = ... deriving Show
+--empty data types
+data Smallests = Dot deriving Show
 
--- exampleSmallest = undefined
+exampleSmallest = Dot
 
 
 
 -- what is the crazieset datatype you can come up with?
--- data Craziests = ... deriving Show
+data Craziests a = Boolean Bool 
+				 | Car Stoplight Nat StudentYear
+				 | Train Craziests (List a) 
+				 | SpeedBoat 
+				 deriving Show
+
+
 
 exampleCraziests = undefined
 
