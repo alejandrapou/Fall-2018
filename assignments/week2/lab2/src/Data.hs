@@ -25,7 +25,7 @@ three = Succ(Succ(Succ Zero))
 five = Succ(Succ(three))
 
 add Zero Zero         = Zero
-add Zero (Suc n)      = Succ n
+add Zero (Succ n)      = Succ n
 add (Succ n) Zero     = Succ n
 add (Succ n) (Succ m) = (Succ(Succ(Add n m)))
 
@@ -36,7 +36,7 @@ add2 (Succ m) n  = Succ(add2 m n)
 
 -- data Stoplight = ... deriving Show
 
-data StopLight = Red | Yellow | Green deriving Show
+data StopLight = Red | Yellow | Green | White deriving Show
 
 favoriteColor = Green
 
@@ -112,7 +112,7 @@ exampleSmallest = Dot
 
 -- what is the crazieset datatype you can come up with?
 data Craziests a = Boolean Bool 
-				 | Car Stoplight Nat StudentYear
+				 | Car StopLight Nat StudentYear
 				 | Train Craziests (List a) 
 				 | SpeedBoat 
 				 deriving Show
